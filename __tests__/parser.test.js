@@ -110,7 +110,6 @@ describe('Parser Tests', () => {
       expect(() => parse("3 +")).toThrow();
       expect(() => parse("+ 3")).toThrow();
       expect(() => parse("3 + + 4")).toThrow();
-      expect(() => parse("3.5")).toThrow(); // Only integers are supported
     });
 
     test('should handle incomplete expressions', () => {
@@ -142,6 +141,44 @@ describe('Parser Tests', () => {
 
     test('should handle only comments without expressions', () => {
       expect(() => parse("// just a comment")).toThrow();
+    });
+  });
+
+  describe('Floating point numbers', () => {
+    test('should parse decimal numbers', () => {
+      expect(parse("2.35")).toBe(2.35);
+      expect(parse("3.14")).toBeCloseTo(3.14);
+      expect(parse("0.5")).toBe(0.5);
+    });
+
+    test('should parse numbers with trailing decimal point', () => {
+      expect(parse("23.")).toBe(23);
+      expect(parse("100.")).toBe(100);
+    });
+
+    test('should parse scientific notation with lowercase e', () => {
+      expect(parse("2.35e-3")).toBeCloseTo(0.00235);
+      expect(parse("2.35e+3")).toBe(2350);
+      expect(parse("1e5")).toBe(100000);
+      expect(parse("5e-2")).toBe(0.05);
+    });
+
+    test('should parse scientific notation with uppercase E', () => {
+      expect(parse("2.35E-3")).toBeCloseTo(0.00235);
+      expect(parse("2.35E+3")).toBe(2350);
+      expect(parse("1E5")).toBe(100000);
+    });
+
+    test('should handle operations with floating point numbers', () => {
+      expect(parse("2.5 + 3.5")).toBe(6);
+      expect(parse("10.5 - 2.3")).toBeCloseTo(8.2);
+      expect(parse("3.5 * 2")).toBe(7);
+      expect(parse("7.5 / 2.5")).toBe(3);
+    });
+
+    test('should handle scientific notation in expressions', () => {
+      expect(parse("1e2 + 50")).toBe(150);
+      expect(parse("2e-1 * 10")).toBeCloseTo(2);
     });
   });
 
