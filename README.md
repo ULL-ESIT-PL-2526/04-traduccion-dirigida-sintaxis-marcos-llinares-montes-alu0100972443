@@ -15,12 +15,12 @@ Devolver un token: Devuelve un token que el parser debe procesar. El parser lo r
 
 Para la entrada 123**45+@:
 
-`123` → `NUMBER` (coincide con `[0-9]+`)
-`**` → `OP` (coincide con "**")
-`45` → `NUMBER` (coincide con `[0-9]+`)
-`+` → `OP` (coincide con `[-+*/`])
-`@` → `INVALID` (coincide con .)
-(fin de entrada) → `EOF`
+- `123` → `NUMBER` (coincide con `[0-9]+`)
+- `**` → `OP` (coincide con "**")
+- `45` → `NUMBER` (coincide con `[0-9]+`)
+- `+` → `OP` (coincide con `[-+*/`])
+- `@` → `INVALID` (coincide con .)
+- (fin de entrada) → `EOF`
 
 Secuencia exacta: `NUMBER, OP, NUMBER, OP, INVALID, EOF`
 
