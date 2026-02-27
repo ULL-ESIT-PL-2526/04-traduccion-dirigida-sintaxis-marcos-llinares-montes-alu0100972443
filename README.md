@@ -1,8 +1,9 @@
 ## Práctica 4 
 Asignatura: Procesadores del Lenguaje
-Autor: Marcos Llinares Montes
-alu0100972443@ull.edu.es
 
+Autor: Marcos Llinares Montes
+
+alu0100972443@ull.edu.es
 
  ### Preguntas del informe
 
