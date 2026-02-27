@@ -45,3 +45,30 @@ Funciona como "cajón de sastre" para el resto de carácteres no considerados y 
 1. Captura caracteres no reconocidos: Si ninguna regla anterior coincide, esta lo hace
 2. Permite manejo de errores: El parser puede detectar `INVALID` y mostrar un error claro
 3. Debe ser la última regla: Como coincide con todo, debe estar al final
+
+### Desarrollo de la práctica
+
+Modifiqué el analizador léxico para que se salte los comentarios //.
+
+`[0-9]+\.?[0-9]*([eE][+-]?[0-9]+)?   { return 'NUMBER';       }`
+
+Modifiqué el analizador léxico para que detecte números de punto flotante.
+
+`[0-9]+\.?[0-9]*([eE][+-]?[0-9]+)?   { return 'NUMBER';       }`
+
+Añadí pruebas para las modificaciones del analizador léxico.
+
+Un ejemplo de algunas de ellas son:
+
+```js
+      expect(parse("2 + 3 // this is a comment")).toBe(5);
+      expect(parse("10 - 4 // subtraction")).toBe(6);
+      expect(parse("5 * 2 // multiply by 2")).toBe(10);
+      expect(parse("2 ** 3 // exponentiation test")).toBe(8);
+
+      expect(parse("2.5 + 3.5")).toBe(6);
+      expect(parse("10.5 - 2.3")).toBeCloseTo(8.2);
+
+      expect(parse("2.35e-3")).toBeCloseTo(0.00235);
+      expect(parse("2.35e+3")).toBe(2350);
+```
