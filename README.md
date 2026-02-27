@@ -50,7 +50,7 @@ Funciona como "cajón de sastre" para el resto de carácteres no considerados y 
 
 Modifiqué el analizador léxico para que se salte los comentarios //.
 
-`[0-9]+\.?[0-9]*([eE][+-]?[0-9]+)?   { return 'NUMBER';       }`
+`\s+|\/\/.*                          { /* skip whitespace */; }`
 
 Modifiqué el analizador léxico para que detecte números de punto flotante.
 
