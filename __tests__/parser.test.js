@@ -128,4 +128,21 @@ describe('Parser Tests', () => {
     });
   });
 
+  describe('Single-line comments', () => {
+    test('should skip comments at the end of expressions', () => {
+      expect(parse("2 + 3 // this is a comment")).toBe(5);
+      expect(parse("10 - 4 // subtraction")).toBe(6);
+      expect(parse("5 * 2 // multiply by 2")).toBe(10);
+      expect(parse("2 ** 3 // exponentiation test")).toBe(8);
+    });
+
+    test('should handle comments with various content', () => {
+      expect(parse("8 / 2 // comment with numbers 123 and symbols @#$")).toBe(4);
+    });
+
+    test('should handle only comments without expressions', () => {
+      expect(() => parse("// just a comment")).toThrow();
+    });
+  });
+
 });
