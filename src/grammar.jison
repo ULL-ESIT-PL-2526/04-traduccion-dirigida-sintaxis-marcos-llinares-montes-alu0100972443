@@ -1,7 +1,7 @@
 /* Lexer */
 %lex
 %%
-\s+                   { /* skip whitespace */; }
+\s+|\/\/.*            { /* skip whitespace */; }
 [0-9]+                { return 'NUMBER';       }
 "**"                  { return 'OP';           }
 [-+*/]                { return 'OP';           }
